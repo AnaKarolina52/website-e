@@ -126,10 +126,12 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
+
     /**
      * {@inheritdoc}
      * @return \common\models\query\ProductQuery the active query used by this AR class.
      */
+
     public static function find()
     {
         return new \common\models\query\ProductQuery(get_called_class());
@@ -143,7 +145,7 @@ class Product extends \yii\db\ActiveRecord
         $transaction =Yii::$app->db->beginTransaction();
         $ok = parent::save($runValidation, $attributeNames);
 
-        if ($ok){
+        if ($ok && $this->imageFile){
             $fullPath = Yii::getAlias('@frontend/web/storage'.$this->image);
 
             $dir = dirname($fullPath);
@@ -151,17 +153,19 @@ class Product extends \yii\db\ActiveRecord
                 $transaction->rollBack();
                 return false;
             }
-
-            $transaction->commit();
         }
-
+        $transaction->commit();
         return $ok;
     }
 
 
     public function getImageUrl(){
 
-        return Yii::$app->params['frontendUrl'].'/storage'.$this->image;
+            if($this->image){
+                return Yii::$app->params['frontendUrl'].'/storage'.$this->image;
+            }
+            return Yii::$app->params['frontendUrl'].'/img/no_image.svg';
+
 
     }
 }
