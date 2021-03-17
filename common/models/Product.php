@@ -5,6 +5,7 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\debug\panels\DumpPanel;
 use yii\helpers\FileHelper;
+use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -165,7 +166,10 @@ class Product extends \yii\db\ActiveRecord
                 return Yii::$app->params['frontendUrl'].'/storage'.$this->image;
             }
             return Yii::$app->params['frontendUrl'].'/img/no_image.svg';
+    }
 
-
+    public function getShortDescription()
+    {
+        return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
     }
 }
