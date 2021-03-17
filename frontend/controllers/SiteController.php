@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Product;
+use common\models\UserLocation;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -77,11 +78,11 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' =>  Product::find()->published(),
+            'query' => Product::find()->published(),
         ]);
-        return $this->render('index',[
+        return $this->render('index', [
             'dataProvider' => $dataProvider
-            ]);
+        ]);
     }
 
     /**
@@ -190,8 +191,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {
