@@ -1,7 +1,9 @@
 <?php
 
 
+
 namespace frontend\controllers;
+
 
 
 use common\models\BasketItem;
@@ -11,6 +13,7 @@ use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+
 
 class BasketController extends \frontend\base\Controller
 {
@@ -66,14 +69,15 @@ class BasketController extends \frontend\base\Controller
         if (!$product) {
             throw new NotFoundHttpException("Product does not exist");
         }
+
         if (\Yii::$app->user->isGuest)
 
         {   //search the register if found do it update the quantity if not create a new basket set in basket and in the session
             $basketItems = \Yii::$app->session->get(BasketItem::SESSION_KEY, []);
             $found = false;
-            foreach ($basketItems as &$basketItem){
-                if($basketItem['id'] == $id){
-                    $basketItem['quantity']++;
+            foreach ($basketItems as &$item){
+                if($item['id'] == $id){
+                    $item['quantity']++;
                     $found = true;
                     break;
                 }
@@ -134,5 +138,36 @@ class BasketController extends \frontend\base\Controller
             BasketItem::deleteAll(['product_id' =>$id, 'created_by' => currUserId()]);
         }
         return $this->redirect(['index']);
+    }
+
+    public function actionChangeQuantity()
+    {
+        $id = \Yii::$app->request->post('id');
+        $product = Product::find()->id($id)->published()->one();
+        if (!$product) {
+            throw new NotFoundHttpException("Product does not exist");
+        }
+
+        $quantity = \Yii::$app->request->post('quantity');
+
+
+        if(isGuest()) {
+            $basketItems =\Yii::$app->session->get(BasketItem::SESSION_KEY, []);
+            foreach ($basketItems as &$basketItem) {
+                if ($basketItem['id'] === $id) {
+                    $basketItem['quantity'] = $quantity;
+                    break;
+                }
+            }
+            \Yii::$app->session->set(BasketItem::SESSION_KEY, $basketItems);
+        }else {
+                    $basketItem = BasketItem::find()->userId(currUserId())->productId($id)->one();
+                    if ($basketItem){
+                        $basketItem->quantity = $quantity;
+                        $basketItem->save();
+          }
+       }
+
+        return BasketItem::getTotalQuantityForUser(currUserId());
     }
 }
