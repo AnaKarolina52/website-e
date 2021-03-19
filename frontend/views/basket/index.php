@@ -25,7 +25,7 @@
                 <tr>
                     <td><?php echo $item['name']?></td>
                     <td>
-                        <img src="<?php echo Yii::$app->params['frontendUrl'].'/storage'. $item['image'] ?>"
+                        <img src="<?php echo \common\models\Product::formatImageUrl($item['image'])  ?>"
                              style=" width: 50px;"
                              alt="<?php echo $item['name'] ?>">
                     </td>
