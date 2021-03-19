@@ -9,6 +9,8 @@
         <h3>Shopping Basket</h3>
     </div>
     <div class="card-body p-0">
+
+        <?php if(!empty($items)): ?>
         <table class = "table table-hover">
             <thead>
             <tr>
@@ -44,10 +46,15 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+
         <div class="card-body text-right">
             <a href="<?php echo yii\helpers\Url::to(['/basket/checkout']) ?>" class="btn btn-primary">Checkout</a>
         </div>
+        <?php else: ?>
 
+        <p class="text-muted text-center p-5">There are no items in the basket</p>
+
+    <?php endif; ?>
     </div>
 </div>
 
