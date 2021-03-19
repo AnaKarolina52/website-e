@@ -4,16 +4,19 @@
 namespace frontend\base;
 
 
-use common\models\Cart;
+use common\models\BasketItem;
+
 
 class Controller extends \yii\web\Controller
 {
     public function beforeAction($action)
-    {
+   {
+      $this->view->params['basketItemCount']= BasketItem::findBySql("
+    
+            SELECT SUM(quantity) FROM basket_items WHERE created_by = :userId", ['userId' => \Yii::$app->user->id]
+      )->scalar();
+      return parent::beforeAction($action);
+   }
 
-        $this->view->params['cartItemCount'] = Cart::findBySql(
-            "SELECT SUM(quantity) FROM cart WHERE created_by = :userId", ['userId' => \Yii::$app->user->id]
-        )-> scalar();
-        return parent::beforeAction($action);
-    }
+
 }

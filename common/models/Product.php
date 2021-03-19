@@ -172,7 +172,7 @@ class Product extends \yii\db\ActiveRecord
 
     }
 
-    return Yii::$app->params['frontendUrl'].'/img/no_image.svg';
+    return Yii::$app->params['frontendUrl'].'/img/no-image-available.jpg';
 }
 
 

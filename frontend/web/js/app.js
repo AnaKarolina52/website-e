@@ -1,9 +1,9 @@
 
 
 $(function (){
-    const $cartQuantity = $('#cart-quantity');
-    const $addToCart = $('.btn-add-to-cart');
-    $addToCart.click(ev =>{
+    const $basketQuantity = $('#basket-quantity');
+    const $addToBasket = $('.btn-add-to-basket');
+    $addToBasket.click(ev =>{
         ev.preventDefault();
         const $this = $(ev.target);
         const id = $this.closest('.product-item').data('key');
@@ -14,7 +14,7 @@ $(function (){
             data: {id},
             success: function (){
                 console.log(arguments)
-                $cartQuantity.text(parseInt($cartQuantity.text() || 0) +1);
+                $basketQuantity.text(parseInt($basketQuantity.text() || 0) + 1);
 
             }
         })

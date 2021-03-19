@@ -11,7 +11,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
-$cartItemCount = $this->params['cartItemCount'];
+$basketItemCount = $this->params['basketItemCount'];
 
 AppAsset::register($this);
 ?>
@@ -40,8 +40,8 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         [
-            'label' => 'Cart <span id="cart-quantity" class="badge badge-danger">'.$cartItemCount.'</span>',
-            'url' => ['/cart/index'],
+            'label' => 'Basket <span id="basket-quantity" class="badge badge-danger">'.$basketItemCount.'</span>',
+            'url' => ['/basket/index'],
             'encode' => false
         ],
 
