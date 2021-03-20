@@ -7,6 +7,8 @@ namespace frontend\controllers;
 
 
 use common\models\BasketItem;
+use common\models\Order;
+use common\models\OrderLocation;
 use common\models\Product;
 use frontend\base\Controller;
 use yii\filters\ContentNegotiator;
@@ -42,20 +44,7 @@ class BasketController extends \frontend\base\Controller
 
 
         }else{
-            $basketItems = BasketItem::findBySql("
-                                        SELECT
-                                        b.product_id as id,
-                                        p.image,
-                                        p.name,
-                                        p.price,
-                                        b.quantity,
-                                        p.price * b.quantity as total_price
-                                   FROM basket_items b
-                                        LEFT JOIN products p on p.id = b.product_id
-                                   WHERE b.created_by = :userId", [
-                                       'userId'=>\Yii::$app->user->id])
-                                        ->asArray()
-                                        ->all();
+            $basketItems = BasketItem::getItemsForUser(currUserId());
         }
 
         return $this->render('index', [
@@ -169,5 +158,43 @@ class BasketController extends \frontend\base\Controller
        }
 
         return BasketItem::getTotalQuantityForUser(currUserId());
+    }
+
+    public function actionCheckout()
+    {
+        $order = new Order();
+        $orderLocation = new OrderLocation();
+        if (!isGuest()) {
+            /** @var  \common\models\User $user */
+            $user = \Yii::$app->user->identity;
+            $userLocation = $user->getLocation();
+
+            $order->firstname = $user->firstname;
+            $order->lastname = $user->lastname;
+            $order->email = $user->email;
+            $order->status = Order::STATUS_DRAFT;
+
+
+            $orderLocation->address = $userLocation->address;
+            $orderLocation->city = $userLocation->city;
+            $orderLocation->state = $userLocation->state;
+            $orderLocation->county = $userLocation->county;
+            $orderLocation->zipcode = $userLocation->zipcode;
+            $basketItems = BasketItem::getItemsForUser(currUserId());
+        }else{
+            $basketItems =\Yii::$app->session->get(BasketItem::SESSION_KEY, []);
+        }
+
+        $productQuantity =BasketItem::getTotalQuantityForUser(currUserId());
+        $totalPrice = BasketItem::getTotalPriceForUser(currUserId());
+
+        return $this->render('checkout', [
+            'order' => $order,
+            'orderLocation' => $orderLocation,
+            'basketItems' => $basketItems,
+            'productQuantity' => $productQuantity,
+            'totalPrice' => $totalPrice
+
+        ]);
     }
 }
