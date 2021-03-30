@@ -35,7 +35,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-expand-lg navbar-dark bg-dark fixed-top',
+            'class' => 'navbar-expand-lg navbar-dark bg-info fixed-top',
         ],
     ]);
     $menuItems = [
@@ -86,9 +86,14 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <div class="row"></div>
+        <div class="col">
+            <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        </div>
+        <div class="col text-right">
+            <p class="pull-right">Created by Ana Karolina</p>
+        </div>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

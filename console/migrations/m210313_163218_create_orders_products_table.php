@@ -25,7 +25,6 @@ class m210313_163218_create_orders_products_table extends Migration
             'quantity' => $this->integer(2)->notNull(),
         ]);
 
-
         // creates index for column `product_id`
         $this->createIndex(
             '{{%idx-orders_products-product_id}}',
@@ -60,7 +59,6 @@ class m210313_163218_create_orders_products_table extends Migration
             'CASCADE'
         );
     }
-
     /**
      * {@inheritdoc}
      */

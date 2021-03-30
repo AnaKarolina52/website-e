@@ -1,24 +1,22 @@
-
-
 <?php
 
-/** @var \common\models\Order  $order*/
-/** @var \common\models\OrderLocation  $orderLocation*/
-/** @var array $basketItems  */
-/** @var int $productQuantity  */
-/** @var float $totalPrice  */
+
+/** @var \common\models\Order $order */
+/** @var \common\models\OrderLocation $orderLocation */
+/** @var array $basketItems */
+/** @var int $productQuantity */
+
+/** @var float $totalPrice */
 
 use yii\bootstrap4\ActiveForm;
 
+
 ?>
 
-
-
-
 <?php $form = ActiveForm::begin([
-    'action'=> [''],
-    ]); ?>
+    'id' => 'checkout-form',
 
+]); ?>
 <div class="row">
     <div class="col">
         <div class="card mb-3">
@@ -37,9 +35,10 @@ use yii\bootstrap4\ActiveForm;
                 <?= $form->field($order, 'email')->textInput(['autofocus' => true]) ?>
             </div>
         </div>
-           <div class="card">
+
+        <div class="card">
             <div class="card-header">
-               <h5> My Account</h5>
+                <h5> My Account</h5>
             </div>
             <div class="card-body">
                 <?= $form->field($orderLocation, 'address') ?>
@@ -50,16 +49,45 @@ use yii\bootstrap4\ActiveForm;
             </div>
         </div>
     </div>
-
     <div class="col">
         <div class="card">
             <div class="card-header">
                 <h4>Overview of your order</h4>
             </div>
             <div class="card-body">
+                <hr>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($basketItems as $item): ?>
+                        <tr>
+                            <td>
+                                <img src="<?php echo \common\models\Product::formatImageUrl($item['image']) ?>"
+                                     style=" width: 50px;"
+                                     alt="<?php echo $item['name'] ?>">
+                            </td>
+                            <td><?php echo $item['name'] ?></td>
+                            <td>
+                                <?php echo $item['quantity'] ?>
+                            </td>
+                            <td><?php echo Yii::$app->formatter->asCurrency($item['total_price']) ?></td>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <hr>
                 <table class="table">
                     <tr>
-                        <td colspan="2"><?php echo $productQuantity ?> Products</td>
+                        <td>Total Products</td>
+                        <td class="text-right"><?php echo $productQuantity ?></td>
                     </tr>
                     <tr>
                         <td>Total Price</td>
@@ -68,6 +96,7 @@ use yii\bootstrap4\ActiveForm;
                         </td>
                     </tr>
                 </table>
+
                 <p class="text-right">
                     <button class="btn btn-success m-3">Checkout</button>
                 </p>
@@ -76,6 +105,5 @@ use yii\bootstrap4\ActiveForm;
     </div>
 </div>
 
-
-
 <?php ActiveForm::end(); ?>
+

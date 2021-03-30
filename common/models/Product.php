@@ -21,9 +21,8 @@ use yii\web\UploadedFile;
  * @property int|null $updated_at
  * @property int|null $created_by
  * @property int|null $updated_by
- *
- * @property Cart[] $carts
- * @property OrdersProducts[] $ordersProducts
+ *@property BasketItem[] $basketItems
+ * @property OrdersProduct[] $ordersProducts
  * @property User $createdBy
  * @property User $updatedBy
  */
@@ -89,23 +88,23 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Carts]].
+     * Gets query for [[BasketItems]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\CartQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\BasketItemQuery
      */
-    public function getCarts()
+    public function getBasketItems()
     {
-        return $this->hasMany(Cart::className(), ['product_id' => 'id']);
+        return $this->hasMany(BasketItem::className(), ['product_id' => 'id']);
     }
 
     /**
      * Gets query for [[OrdersProducts]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrdersProductsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrdersProductQuery
      */
     public function getOrdersProducts()
     {
-        return $this->hasMany(OrdersProducts::className(), ['product_id' => 'id']);
+        return $this->hasMany(OrdersProduct::className(), ['product_id' => 'id']);
     }
 
     /**
@@ -143,6 +142,7 @@ class Product extends \yii\db\ActiveRecord
         if ($this->imageFile){
             $this->image = '/products/'.Yii::$app->security->generateRandomString().'/'.$this->imageFile->name;
         }
+
         $transaction =Yii::$app->db->beginTransaction();
         $ok = parent::save($runValidation, $attributeNames);
 
@@ -174,11 +174,23 @@ class Product extends \yii\db\ActiveRecord
 
     return Yii::$app->params['frontendUrl'].'/img/no-image-available.jpg';
 }
-
-
-
     public function getShortDescription()
     {
         return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        if($this->image){
+            $dir = Yii::getAlias('@frontend/web/storage').dirname($this->image);
+            FileHelper::removeDirectory($dir);
+        }
+    }
+
+    public function delete()
+    {
+        Yii::$app->db->createCommand("SET FOREIGN_KEY_CHECKS = 0;");
+        return parent::delete();
     }
 }

@@ -10,9 +10,6 @@ use yii\bootstrap4\Html;
 
 ?>
 
-
-
-
 <div class="row">
     <div class="col">
         <div class="card">

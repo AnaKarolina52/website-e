@@ -42,9 +42,10 @@ $this->title = 'Login';
                 <hr>
                 <?php ActiveForm::end() ?>
 
-            <div class="text-center">
-                <a class="small" href="<?php echo \yii\helpers\Url::to(['/site/forgot-password']) ?>">Forgot Password?</a>
-            </div>
+<!--            Implement it-->
+<!--            <div class="text-center">-->
+<!--                <a class="small" href="--><?php //echo \yii\helpers\Url::to(['/site/forgot-password']) ?><!--">Forgot Password?</a>-->
+<!--            </div>-->
         </div>
     </div>
 </div>

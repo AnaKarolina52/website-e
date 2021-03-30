@@ -9,6 +9,7 @@ use yii\bootstrap4\ActiveForm;
 /* @var $form yii\bootstrap4\ActiveForm */
 ?>
 
+<!--form to imput the product-->
 <div class="product-form">
 
     <?php $form = ActiveForm::begin([
@@ -35,9 +36,11 @@ use yii\bootstrap4\ActiveForm;
 
     ])->textInput(['type'=>'file']) ?>
 
+<!--    step attribute allows to specify the values with integer with two digits after the decimal-->
     <?= $form->field($model, 'price')->textInput([
             'maxlength'=>true,
-            'type'=>'number'
+            'type'=>'number',
+            'step'=> '0.01'
     ]) ?>
 
     <?= $form->field($model, 'status')->checkbox() ?>
