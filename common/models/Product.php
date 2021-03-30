@@ -144,9 +144,9 @@ class Product extends \yii\db\ActiveRecord
         }
 
         $transaction =Yii::$app->db->beginTransaction();
-        $ok = parent::save($runValidation, $attributeNames);
+        $ready = parent::save($runValidation, $attributeNames);
 
-        if ($ok && $this->imageFile){
+        if ($ready && $this->imageFile){
             $fullPath = Yii::getAlias('@frontend/web/storage'.$this->image);
 
             $dir = dirname($fullPath);
@@ -156,7 +156,7 @@ class Product extends \yii\db\ActiveRecord
             }
         }
         $transaction->commit();
-        return $ok;
+        return $ready;
     }
 
 
