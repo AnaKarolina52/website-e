@@ -10,16 +10,19 @@ use yii\grid\GridView;
 $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<!--todos as funcoes dos produtos estao aqui a forma que ele vai aprecer imagem nome id,update-->
 <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+<!--        vai para criar um novo produto-->
         <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+<!--    A image vai requerer mais trabalho visto que teremos que pegar a imagem e configurar para ela aparecer nesse view -->
     <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -31,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'style' => 'width: 55px'
                     ]
             ],
+//            configurando a imagem e mostrando o caminho de onde a imagem vai vir na funcao getImage
             [
                 'label' => 'Image',
                 'attribute' => 'image',
@@ -40,7 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'name',
+
             'price:currency',
+//            make a nice way to see the status, that shhow if the procuct is active at the web or not
             [
                     'attribute'=> 'status',
                     'content'=> function($model){
@@ -50,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     }
             ],
+//            created and update way to show at the screen make it in one line, formatter in config\main
             [
                 'attribute'=> 'created_at',
                 'format' => ['datetime'],
@@ -63,6 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_by',
             //'updated_by',
 
+//os botoes que vao aparecer criado no common/grid AcionColumn-> que vai permitir usar as funcionalidades do bootstrap4
             [
                 'class' => 'common\grid\ActionColumn',
                 'template'=>'{view} {update} {delete}'

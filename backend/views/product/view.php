@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<!--here its the view of the product when you are at the product and click at view its gonna to redirect to the view page -->
 <div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

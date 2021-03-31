@@ -159,7 +159,7 @@ class Product extends \yii\db\ActiveRecord
         return $ready;
     }
 
-
+//    aqui vamos fazer com que tenhamos acesso a imagem tanto quando temos a imagem especifica ate qdo nao temos imagem
     public function getImageUrl()
     {
         return self::formatImageUrl($this->image);
@@ -171,14 +171,15 @@ class Product extends \yii\db\ActiveRecord
             return Yii::$app->params['frontendUrl'].'/storage'.$imagePath;
 
     }
-
+// caso nao seja selecionado uma imagem estabelecemos uma imagem padrao que vai aparecer qdo nao e encontrada imagem no produto
     return Yii::$app->params['frontendUrl'].'/img/no-image-available.jpg';
 }
+//delimitar o tamanho do texto que aparece sobre o produto
     public function getShortDescription()
     {
         return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
     }
-
+//remove the product without take the product to the view order
     public function afterDelete()
     {
         parent::afterDelete();

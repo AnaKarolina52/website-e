@@ -10,7 +10,8 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+
+<div class="text-xl-center">
     <div class="row">
         <!-- Total Earnings Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
