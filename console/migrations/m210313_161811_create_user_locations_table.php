@@ -20,9 +20,9 @@ class m210313_161811_create_user_locations_table extends Migration
             'user_id' => $this->integer(11)->notNull(),
             'address' => $this->string(255)->notNull(),
             'city' => $this->string(255)->notNull(),
-            'state' => $this->string(255)->notNull(),
+            'country' => $this->string(255)->notNull(),
             'county' => $this->string(255)->notNull(),
-            'zipcode' => $this->string(255),
+            'postcode' => $this->string(255),
         ]);
 
         // creates index for column `user_id`
