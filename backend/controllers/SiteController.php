@@ -58,6 +58,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * Displays homepage.
      *
@@ -65,6 +66,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         $totalEarnings = Order::find()->paid()->sum('total_price');
         $totalOrders = Order::find()->paid()->count();
         $totalProducts = OrdersProduct::find()

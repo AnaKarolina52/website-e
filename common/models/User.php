@@ -231,7 +231,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
-
+//show first name and last name as fullname in case that dont have fullname show email
     public function getDisplayName()
     {
         $fullName = trim($this->firstname.' '.$this->lastname);

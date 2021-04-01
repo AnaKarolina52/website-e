@@ -77,6 +77,8 @@ class SiteController extends \frontend\base\Controller
      */
     public function actionIndex()
     {
+
+//        select the products to be seen, all the products that is active
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->published(),
         ]);

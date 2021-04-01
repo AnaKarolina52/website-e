@@ -5,6 +5,8 @@
 
 $this->title = 'My Yii Application';
 ?>
+
+<!--Products views formatiing-->
 <div class="site-index">
 
     <div class="body-content">
@@ -16,6 +18,7 @@ $this->title = 'My Yii Application';
                 'itemOptions' => [
                         'class' => 'col-lg-4 col-md-6 mb-4 product-item'
                 ],
+//                customize page view
                 'pager' => [
                         'class' => \yii\bootstrap4\LinkPager::class
                 ]
