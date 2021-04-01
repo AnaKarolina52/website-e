@@ -11,9 +11,9 @@ use Yii;
  * @property int $user_id
  * @property string $address
  * @property string $city
- * @property string $state
+ * @property string $country
  * @property string $county
- * @property string|null $zipcode
+ * @property string|null $postcode
  *
  * @property User $user
  */
@@ -35,7 +35,7 @@ class UserLocation extends \yii\db\ActiveRecord
         return [
             [['user_id', 'address', 'city', 'state', 'county'], 'required'],
             [['user_id'], 'integer'],
-            [['address', 'city', 'state', 'county', 'zipcode'], 'string', 'max' => 255],
+            [['address', 'city', 'country', 'county', 'postcode'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -50,9 +50,9 @@ class UserLocation extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'address' => 'Address',
             'city' => 'City',
-            'state' => 'State',
+            'country' => 'Country',
             'county' => 'County',
-            'zipcode' => 'Zipcode',
+            'postcode' => 'Postcode',
         ];
     }
 

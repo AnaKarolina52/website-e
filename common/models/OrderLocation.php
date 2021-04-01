@@ -10,9 +10,9 @@ use Yii;
  * @property int $order_id
  * @property string $address
  * @property string $city
- * @property string $state
+ * @property string $country
  * @property string $county
- * @property string|null $zipcode
+ * @property string|null $postcode
  *
  * @property Order $order
  */
@@ -32,9 +32,9 @@ class OrderLocation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'address', 'city', 'state', 'county'], 'required'],
+            [['order_id', 'address', 'city', 'country', 'county'], 'required'],
             [['order_id'], 'integer'],
-            [['address', 'city', 'state', 'county', 'zipcode'], 'string', 'max' => 255],
+            [['address', 'city', 'country', 'county', 'postcode'], 'string', 'max' => 255],
             [['order_id'], 'unique'],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
@@ -49,9 +49,9 @@ class OrderLocation extends \yii\db\ActiveRecord
             'order_id' => 'Order ID',
             'address' => 'Address',
             'city' => 'City',
-            'state' => 'State',
+            'country' => 'Country',
             'county' => 'County',
-            'zipcode' => 'Zipcode',
+            'postcode' => 'Postcode',
         ];
     }
 
