@@ -20,9 +20,9 @@ class m210313_162804_create_order_locations_table extends Migration
             'order_id' => $this->integer()->notNull(),
             'address' => $this->string(255)->notNull(),
             'city' => $this->string(255)->notNull(),
-            'state' => $this->string(255)->notNull(),
+            'country' => $this->string(255)->notNull(),
             'county' => $this->string(255)->notNull(),
-            'zipcode' => $this->string(255),
+            'postcode' => $this->string(255),
         ]);
 
         $this->addPrimaryKey('PK_order_locations', '{{%order_locations}}', 'order_id');
