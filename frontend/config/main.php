@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+//    name that you will give to the website
     'name' => 'Website Name',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
