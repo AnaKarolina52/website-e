@@ -43,9 +43,9 @@ use yii\bootstrap4\ActiveForm;
             <div class="card-body">
                 <?= $form->field($orderLocation, 'address') ?>
                 <?= $form->field($orderLocation, 'city') ?>
-                <?= $form->field($orderLocation, 'state') ?>
+                <?= $form->field($orderLocation, 'country') ?>
                 <?= $form->field($orderLocation, 'county') ?>
-                <?= $form->field($orderLocation, 'zipcode') ?>
+                <?= $form->field($orderLocation, 'postcode') ?>
             </div>
         </div>
     </div>

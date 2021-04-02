@@ -119,7 +119,7 @@ class Order extends \yii\db\ActiveRecord
         if($orderLocation->load($postData) && $orderLocation->save()){
             return true;
         }
-        throw new Exception("Was not possible save order location: ".implode("<br>", $orderLocation->getFirstErrors()));
+        throw new Exception("Was not possible save order location: ".implode('<br>', $orderLocation->getFirstErrors()));
     }
 
     public function saveOrdersProducts()

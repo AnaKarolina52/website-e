@@ -41,7 +41,7 @@ $orderLocation = $order->orderLocation
             </tr>
             <tr>
                 <th>Country</th>
-                <td><?php echo $orderLocation->state ?></td>
+                <td><?php echo $orderLocation->country ?></td>
             </tr>
             <tr>
                 <th>County</th>
@@ -49,7 +49,7 @@ $orderLocation = $order->orderLocation
             </tr>
             <tr>
                 <th>PostCode</th>
-                <td><?php echo $orderLocation->zipcode ?></td>
+                <td><?php echo $orderLocation->postcode ?></td>
             </tr>
         </table>
     </div>

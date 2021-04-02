@@ -189,9 +189,11 @@ class Product extends \yii\db\ActiveRecord
         }
     }
 
+    //tentativa de nao deletar o arquivo do produto depois de deletar o produto
     public function delete()
     {
         Yii::$app->db->createCommand("SET FOREIGN_KEY_CHECKS = 0;");
         return parent::delete();
     }
+
 }

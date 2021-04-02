@@ -7,7 +7,6 @@ use yii\bootstrap4\ActiveForm;
 /** @var \yii\web\View $this */
 /** @var \common\models\UserLocation $userLocation */
 
-
 ?>
 
 
@@ -17,7 +16,6 @@ use yii\bootstrap4\ActiveForm;
 </div>
 <?php endif ?>
 
-
 <?php $AddressForm = ActiveForm::begin([
     'action' => ['/profile/update-location'],
     'options' => [
@@ -26,9 +24,9 @@ use yii\bootstrap4\ActiveForm;
 ]); ?>
 <?= $AddressForm->field($userLocation, 'address') ?>
 <?= $AddressForm->field($userLocation, 'city') ?>
-<?= $AddressForm->field($userLocation, 'state') ?>
+<?= $AddressForm->field($userLocation, 'country') ?>
 <?= $AddressForm->field($userLocation, 'county') ?>
-<?= $AddressForm->field($userLocation, 'zipcode') ?>
+<?= $AddressForm->field($userLocation, 'postcode') ?>
 <button class="btn btn-primary">Update</button>
 <?php ActiveForm::end() ?>
 

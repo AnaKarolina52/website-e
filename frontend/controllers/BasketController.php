@@ -208,7 +208,7 @@ class BasketController extends \frontend\base\Controller
 
             $orderLocation->address = $userLocation->address;
             $orderLocation->city = $userLocation->city;
-            $orderLocation->state = $userLocation->state;
+            $orderLocation->country = $userLocation->country;
             $orderLocation->county = $userLocation->county;
             $orderLocation->zipcode = $userLocation->zipcode;
         }
