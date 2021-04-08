@@ -210,7 +210,7 @@ class BasketController extends \frontend\base\Controller
             $orderLocation->city = $userLocation->city;
             $orderLocation->country = $userLocation->country;
             $orderLocation->county = $userLocation->county;
-            $orderLocation->zipcode = $userLocation->zipcode;
+            $orderLocation->postcode = $userLocation->postcode;
         }
         return $this->render('checkout', [
             'order' => $order,
